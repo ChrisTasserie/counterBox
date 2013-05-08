@@ -1,6 +1,6 @@
 /****************************************************************
 *****************************************************************
-****  Class of Javascript Document for jQuery              ****
+****	Class of Javascript Document for jQuery              ****
 *****************************************************************
 ****    Powered by Christophe Tasserie                       ****
 ****    Designed by Christophe Tasserie                      ****
@@ -29,6 +29,9 @@
 (function($){
 	$.fn.extend({
 		counterBox:function(options, value, duration, easing, callback){
+			/****************************************************************
+			****	Variables                                            ****
+			****************************************************************/
 			var _options;
 			var _value = value;
 			var _duration = duration;
@@ -39,13 +42,11 @@
 			var setValue = function(item, value){
 				if(isNaN(value)==false){_value=parseInt(value);}
 				else{_value=0;}
-				//var nRoll=_options.numberMax.toString().length; //_options.numberRoll
-				//if(_value.toString().length>nRoll){_value=parseInt(_value.toString().substring(0,nRoll));}
-				if(_value>_options.numberMax){_value=_options.numberMax;}
+				if(_value>_options.maxValue){_value=_options.maxValue;}
 				init(item);
 			}
 			var setValueMax = function(item, value){
-				_options.numberMax=value;
+				_options.maxValue=value;
 				createLastNumber(item);
 				setValue(item,_value);
 			}
@@ -57,16 +58,16 @@
 				var array = new Array();
 				var hNumber=_options.numberHeight/2;
 				var start=_options.numberStart;
-				if(_value>_options.numberMax){
+				if(_value>_options.maxValue){
 					if(_options.repeat==true){_value=0;}
-					else{_value=_options.numberMax;}
+					else{_value=_options.maxValue;}
 				}
 				$($(item).find("input")).val(_value);
 				if(_value.toString().length>=1){array=_value.toString().split('');}
 				else{array=new Array(_options.numberStart);}
-				if(array.length<=_options.numberMax.toString().length){
+				if(array.length<=_options.maxValue.toString().length){
 					$box=$(item).children()[1];
-					for(i=1;i<=(_options.numberMax.toString().length-array.length);i++){
+					for(i=1;i<=(_options.maxValue.toString().length-array.length);i++){
 						var number=_options.numberStart;
 						$column=$($($box).children()[i]).children()[0];
 						var columnBox=$($($column).children()[0]).height();
@@ -76,7 +77,7 @@
 						$($column).attr("value",number);
 					}
 					for(i=1;i<array.length;i++){
-						var nRoll=_options.numberMax.toString().length-i; //_options.numberRoll
+						var nRoll=_options.maxValue.toString().length-i;
 						var nArray=array.length-(i+1);
 						var number=array[nArray]-start;
 						$column=$($($box).children()[nRoll]).children()[0];
@@ -86,7 +87,7 @@
 						$($column).animate({top:-top+"px"},_duration,_easing);
 						$($column).attr("value",number);
 					}
-					var nRoll=_options.numberMax.toString().length; //_options.numberRoll
+					var nRoll=_options.maxValue.toString().length;
 					var nArray=array.length-1;
 					var number=array[nArray]-start;
 					$column=$($($box).children()[nRoll]).children()[0];
@@ -95,8 +96,8 @@
 					if(parseInt($($column).attr("value"))>number){$($column).animate({top:-(top-(hNumber*_speed))+"px"},0);}
 					$($column).animate({top:-top+"px"},_duration,_easing,function(callback){
 						if(mycallback!=null){
-							if(_value<_options.numberMax){mycallback();}
-							else if(_value==_options.numberMax){
+							if(_value<_options.maxValue){mycallback();}
+							else if(_value==_options.maxValue){
 								if(_callback!=null){_callback();}
 								if(_options.repeat==true){mycallback();}
 							}
@@ -114,15 +115,15 @@
 				var hNumber=_options.numberHeight/2;
 				var start=_options.numberStart;
 				if(_value<0){
-					if(_options.repeat==true){_value=_options.numberMax;}
+					if(_options.repeat==true){_value=_options.maxValue;}
 					else{_value=0;}
 				}
 				$($(item).find("input")).val(_value);
 				if(_value.toString().length>=1){array=_value.toString().split('');}
 				else{array=new Array(_options.numberStart);}
-				if(array.length<=_options.numberMax.toString().length){
+				if(array.length<=_options.maxValue.toString().length){
 					$box=$(item).children()[1];
-					for(i=1;i<=(_options.numberMax.toString().length-array.length);i++){
+					for(i=1;i<=(_options.maxValue.toString().length-array.length);i++){
 						var number=_options.numberStart;
 						$column=$($($box).children()[i]).children()[0];
 						var columnBox=$($($column).children()[0]).height();
@@ -132,7 +133,7 @@
 						$($column).attr("value",number);
 					}
 					for(i=1;i<array.length;i++){
-						var nRoll=_options.numberMax.toString().length-i; //_options.numberRoll
+						var nRoll=_options.maxValue.toString().length-i;
 						var nArray=array.length-(i+1);
 						var number=array[nArray]-start;
 						$column=$($($box).children()[nRoll]).children()[0];
@@ -142,7 +143,7 @@
 						$($column).animate({top:-top+"px"},_duration,_easing);
 						$($column).attr("value",number);
 					}
-					var nRoll=_options.numberMax.toString().length; //_options.numberRoll
+					var nRoll=_options.maxValue.toString().length;
 					var nArray=array.length-1;
 					var number=array[nArray]-start;
 					$column=$($($box).children()[nRoll]).children()[0];
@@ -168,32 +169,36 @@
 			if(!easing){_easing="linear";}
 			if(!callback){_callback=null;}
 			
+			/****************************************************************
+			****	Extend Otions counterBox                             ****
+			****************************************************************/
 			_options = $.extend({
-			  numberStart:0,
-			  numberStop:9,
-			  numberMax:9,
-			  numberRoll:2,
-			  borderWidth:2,
-			  innerWidth:0,
-			  numberWidth:20,
-			  numberHeight:60,
-			  percentShadowRoll:50,
-			  xShadowBox:"0px",
-			  yShadowBox:"0px",
-			  blurShadowBox:"5px",
-			  spreadShadowBox:"0px",
-			  shadowBox:true,
-			  colorStart:"rgba(96,96,96,1)",
-			  colorStop:"rgba(248,248,248,1)",
-			  colorRoll:"rgba(255,0,255,1)",
-			  colorShadowRoll:"rgba(0,0,0,0.8)",
-			  colorShadowBox:"rgba(0,0,0,0.8)",
-			  colorText:"rgba(0,0,0,1)",
-			  colorBackground:"rgba(255,255,255,1)",
+			  numberStart:0,                                     //Number for start. Do not modify
+			  numberStop:9,                                      //Number for stop. Do not modify
+			  maxValue:9,                                        //Max value
+			  numberRoll:2,                                      //Number of roll. Do not modify
+			  borderWidth:2,                                     //Width border
+			  innerWidth:0,                                      //Width inner border
+			  numberWidth:20,                                    //Width roll
+			  numberHeight:60,                                   //Height roll
+			  percentShadowRoll:50,                              //Height shadow roll
+			  xShadowBox:"0px",                                  //Postion horizontal shadow box
+			  yShadowBox:"0px",                                  //Postion vertical shadow box
+			  blurShadowBox:"5px",                               //Blur shadow box
+			  spreadShadowBox:"0px",                             //Spread shadow box
+			  shadowBox:true,                                    //Enable shadow box
+			  colorFrom:"rgba(96,96,96,1)",                      //Color from box
+			  colorTo:"rgba(248,248,248,1)",                     //Color to box
+			  colorRoll:"rgba(255,0,255,1)",                     //Background color roll
+			  colorShadowRollFrom:"rgba(0,0,0,0.8)",             //Color from shadow roll
+			  colorShadowRollTo:"rgba(255,255,255,0)",           //Color to shadow roll
+			  colorShadowBox:"rgba(0,0,0,0.8)",                  //Color shadow box
+			  colorText:"rgba(0,0,0,1)",                         //Color text
+			  colorBackground:"rgba(255,255,255,1)",             //BackgroundColor
 			  repeat:true,
 			}, options);
 			
-			if(_value>_options.numberMax){_value=_options.numberMax;}
+			if(_value>_options.maxValue){_value=_options.maxValue;}
 			_hiddenValue=document.createElement("input");
 			$(_hiddenValue).attr("type","hidden");
 			$(_hiddenValue).val(_value);
@@ -204,14 +209,16 @@
 			createLastNumber(this);
 			init(this);
 			
+			/****************************************************************
+			****	Extend Function counterBox                           ****
+			****************************************************************/
 			$.fn.extend({
 				setValue:function(value){setValue($(this), value);},
 				setValueMax:function(value){setValueMax($(this), value);},
 				setOptions:function(value){
-					alert(value.repeat);
 					if(value.numberStart){_options.numberStart=value.numberStart;}
 					if(value.numberStop){_options.numberStop=value.numberStop;}
-					if(value.numberMax){_options.numberMax=value.numberMax;}
+					if(value.maxValue){_options.maxValue=value.maxValue;}
 					if(value.numberRoll){_options.numberRoll=value.numberRoll;}
 					if(value.borderWidth){_options.borderWidth=value.borderWidth;}
 					if(value.innerWidth){_options.innerWidth=value.innerWidth;}
@@ -223,17 +230,18 @@
 					if(value.blurShadowBox){_options.blurShadowBox=value.blurShadowBox;}
 					if(value.spreadShadowBox){_options.spreadShadowBox=value.spreadShadowBox;}
 					if(value.shadowBox){_options.shadowBox=value.shadowBox;}
-					if(value.colorStart){_options.colorStart=value.colorStart;}
-					if(value.colorStop){_options.colorStop=value.colorStop;}
+					if(value.colorFrom){_options.colorFrom=value.colorFrom;}
+					if(value.colorTo){_options.colorTo=value.colorTo;}
 					if(value.colorRoll){_options.colorRoll=value.colorRoll;}
-					if(value.colorShadowRoll){_options.colorShadowRoll=value.colorShadowRoll;}
+					if(value.colorShadowRollFrom){_options.colorShadowRollFrom=value.colorShadowRollFrom;}
+					if(value.colorShadowRollTo){_options.colorShadowRollTo=value.colorShadowRollTo;}
 					if(value.colorShadowBox){_options.colorShadowBox=value.colorShadowBox;}
 					if(value.colorText){_options.colorText=value.colorText;}
 					if(value.colorBackground){_options.colorBackground=value.colorBackground;}
 					if(value.repeat){_options.repeat=value.repeat;}
 				},
 				getValue:function(){return $($(this).find("input")).val();},
-				getValueMax:function(){return _options.numberMax;},
+				getValueMax:function(){return _options.maxValue;},
 				getOptions:function(){return _options;},
 				gotoValue:function(value, callback){gotoValue($(this), value, callback);},
 				addTick:function(value, callback){gotoValue($(this), parseInt($($(this).find("input")).val())+value, callback);},
@@ -247,7 +255,7 @@
 				/**********************************************
 				****    Variables                          ****
 				**********************************************/
-				var nRoll=_options.numberMax.toString().length; //_options.numberRoll
+				var nRoll=_options.maxValue.toString().length; //_options.numberRoll
 				var pShadowRoll=_options.percentShadowRoll/100;
 				//----    Largeur    ----//
 				var wBorder=_options.borderWidth;
@@ -267,10 +275,11 @@
 				var spreadShadowBox=_options.spreadShadowBox
 				//-----------------------//
 				//----    Couleur    ----//
-				var cStart=_options.colorStart;
-				var cStop=_options.colorStop;
+				var cStart=_options.colorFrom;
+				var cStop=_options.colorTo;
 				var cShadowBox=_options.colorShadowBox;
-				var cShadowRoll=_options.colorShadowRoll;
+				var cShadowRollFrom=_options.colorShadowRollFrom;
+				var cShadowRollTo=_options.colorShadowRollTo;
 				var cBackground=_options.colorBackground;
 				//-----------------------//
 				//-----------------------//
@@ -295,21 +304,21 @@
 				for(iRoll=0;iRoll<nRoll;iRoll++){
 					var shadowLeft=$canvas.getContext("2d");
 					var gradientLeft=shadowLeft.createLinearGradient(0,wBorder,0,hRoll);
-					gradientLeft.addColorStop(0,cShadowRoll);
-					gradientLeft.addColorStop(pShadowRoll,"rgba(255,255,255,0)");
-					gradientLeft.addColorStop(pShadowRoll,"rgba(255,255,255,0)");
-					gradientLeft.addColorStop(1,cShadowRoll);
+					gradientLeft.addColorStop(0,cShadowRollFrom);
+					gradientLeft.addColorStop(pShadowRoll,cShadowRollTo);
+					gradientLeft.addColorStop(pShadowRoll,cShadowRollTo);
+					gradientLeft.addColorStop(1,cShadowRollFrom);
 					shadowLeft.fillStyle=gradientLeft;
 					shadowLeft.fillRect(wBorder+((wInner*iRoll)+(wNumber*iRoll)),wBorder,wNumber,hNumber);    //----    (x,y,width,height)    ----//
 				}
 				/**********************************************
-				****    Création du cadre du haut          ****
+				****    Create top border                  ****
 				**********************************************/
 				var borderTop=$canvas.getContext("2d");
 				borderTop.fillStyle=cStart;
 				borderTop.fillRect(0,0,wBox,wBorder);
 				/**********************************************
-				****    Création du cadre du droite        ****
+				****    Create right border                ****
 				**********************************************/
 				var borderRight=$canvas.getContext("2d");
 				var gradientBorderRight=borderRight.createLinearGradient(0,wBorder,0,hRoll);
@@ -319,13 +328,13 @@
 				borderRight.fillStyle=gradientBorderRight;
 				borderRight.fillRect(wBox-wBorder,wBorder,wBorder,hNumber);
 				/**********************************************
-				****    Création du cadre du bas           ****
+				****    Create bottom border               ****
 				**********************************************/
 				var borderBottom=$canvas.getContext("2d");
 				borderTop.fillStyle=cStart;
 				borderTop.fillRect(0,(wBorder+hNumber),wBox,wBorder);
 				/**********************************************
-				****    Création du cadre du gauche        ****
+				****    Create left border                 ****
 				**********************************************/
 				var borderLeft=$canvas.getContext("2d");
 				var gradientBorderLeft=borderLeft.createLinearGradient(0,wBorder,0,hRoll);
@@ -335,7 +344,7 @@
 				borderLeft.fillStyle=gradientBorderLeft;
 				borderLeft.fillRect(0,wBorder,wBorder,hNumber);
 				/**********************************************
-				****    Création du cadre du millieu       ****
+				****    Create inner border                ****
 				**********************************************/
 				if(wInner>0){
 					for(iInner=1;iInner<nRoll;iInner++){
@@ -353,7 +362,7 @@
 				/**********************************************
 				****    Variables                          ****
 				**********************************************/
-				var nRoll=_options.numberMax.toString().length; //_options.numberRoll
+				var nRoll=_options.maxValue.toString().length;
 				for(iRoll=0;iRoll<nRoll;iRoll++){
 					var nNumber=0;
 					var start=_options.numberStart;
@@ -398,7 +407,7 @@
 								$($divNumber).append($spanNumber);
 								$($divRowNumber).append($divNumber);
 								/**********************************************
-								****    Création de l'ombre gauche         ****
+								****    Create number                      ****
 								**********************************************/
 								$($spanNumber).html(i);
 							}
@@ -410,7 +419,7 @@
 				}
 			}
 			function createLastNumber(item){
-				var nMax=parseInt(_options.numberMax.toString().substr(0,1));
+				var nMax=parseInt(_options.maxValue.toString().substr(0,1));
 				$box=$(item).children()[1];
 				$column=$($($box).children()[1]).children()[0];
 				for(i=0;i<3;i++){
@@ -425,13 +434,13 @@
 				var array = new Array();
 				var hNumber=_options.numberHeight/2;
 				var start=_options.numberStart;
-				var nRoll=_options.numberMax.toString().length; //_options.numberRoll
+				var nRoll=_options.maxValue.toString().length;
 				if(_value.toString().length>=1){array=_value.toString().split('');}
 				else{array=new Array(_options.numberStart);}
 				$($(item).find("input")).val(_value);
 				if(array.length<=nRoll){
 					$box=$(item).children()[1];
-					for(i=1;i<=_options.numberMax.toString().length;i++){
+					for(i=1;i<=_options.maxValue.toString().length;i++){
 						var number=_options.numberStart;
 						$column=$($($box).children()[i]).children()[0];
 						var columnBox=$($($column).children()[0]).height();
@@ -440,7 +449,7 @@
 						$($column).attr("value",number);
 					}
 					var nArray=0;
-					for(i=(_options.numberMax.toString().length-array.length);i<=array.length;i++){
+					for(i=(_options.maxValue.toString().length-array.length);i<=array.length;i++){
 						var nRoll=i+1;
 						var number=array[nArray];
 						$column=$($($box).children()[nRoll]).children()[0];
