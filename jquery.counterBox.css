@@ -1,0 +1,68 @@
+/****************************************************************
+*****************************************************************
+****  Class of CSS Document                                ****
+*****************************************************************
+****    Powered by Christophe Tasserie                       ****
+****    Designed by Christophe Tasserie                      ****
+****                                                         ****
+****    Copyright © 2011 - All rights reserved               ****
+****                                                         ****
+****    M. Tasserie Christophe                               ****
+****                                                         ****
+****    48 Chemin des autrichiens                            ****
+****    06600 Antibes                                        ****
+****    France                                               ****
+****                                                         ****
+****    +33 622 256 941                                      ****
+****    christophe@tasserie.fr                               ****
+****    http://tasserie.fr                                   ****
+*****************************************************************
+****************************************************************/
+
+
+/****************************************************************
+'****    Encodage                                            ****
+/***************************************************************/
+@charset "utf-8";
+
+/****************************************************************
+****    Classes                                              ****
+****************************************************************/
+.box_timer{
+	position:absolute;
+	top:0px;
+	left:0px;
+	z-index:9999;
+}
+.box_timer-number-mask{
+	position:absolute;
+	overflow:hidden;
+	z-index:999;
+}
+.box_timer-number-column{
+	position:absolute;
+	top:0px;
+	left:0px;
+	z-index:999;
+}
+.box_timer-number-row{
+	position:relative;
+	top:0px;
+	z-index:999;
+}
+.box_timer-number{
+	position:relative;
+	z-index:999;
+}
+.box_timer-number-inner{
+	display:table-cell;
+	vertical-align:middle;
+	text-align:center;
+	margin:0;
+	padding:0;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:48px;
+	font-style:normal;
+	font-weight:normal;
+	overflow:hidden;
+}
