@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="jquery.counterBox.css"/>
-<title>Document sans nom</title>
+<title>.: jQuery Counter Box By Christophe Tasserie :.</title>
 <script type="text/javascript" src="jquery-2.0.0.min.js"></script>
 <script type="text/javascript" src="jquery.counterBox.js"></script>
 <script type="text/javascript">
 $(function(){
-  $seconds=$("#my_box").counterBox({maxValue:100,repeat:false},69,1000,"linear",finish);
+	$seconds=$("#my_box").counterBox({maxValue:100,repeat:false},69,1000,"linear",finish);
 	addTick();
 	function addTick(){$seconds.addTick(1,addTick);}
 	function finish(){alert("Finish");}
