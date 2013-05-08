@@ -194,8 +194,8 @@
 			  colorShadowRollTo:"rgba(255,255,255,0)",           //Color to shadow roll
 			  colorShadowBox:"rgba(0,0,0,0.8)",                  //Color shadow box
 			  colorText:"rgba(0,0,0,1)",                         //Color text
-			  colorBackground:"rgba(255,255,255,1)",             //BackgroundColor
-			  repeat:true,
+			  background:"rgba(255,255,255,1)",                  //Background
+			  repeat:true,                                       //Mode repeat
 			}, options);
 			
 			if(_value>_options.maxValue){_value=_options.maxValue;}
@@ -237,7 +237,7 @@
 					if(value.colorShadowRollTo){_options.colorShadowRollTo=value.colorShadowRollTo;}
 					if(value.colorShadowBox){_options.colorShadowBox=value.colorShadowBox;}
 					if(value.colorText){_options.colorText=value.colorText;}
-					if(value.colorBackground){_options.colorBackground=value.colorBackground;}
+					if(value.background){_options.background=value.background;}
 					if(value.repeat){_options.repeat=value.repeat;}
 				},
 				getValue:function(){return $($(this).find("input")).val();},
@@ -255,7 +255,7 @@
 				/**********************************************
 				****    Variables                          ****
 				**********************************************/
-				var nRoll=_options.maxValue.toString().length; //_options.numberRoll
+				var nRoll=_options.maxValue.toString().length;
 				var pShadowRoll=_options.percentShadowRoll/100;
 				//----    Largeur    ----//
 				var wBorder=_options.borderWidth;
@@ -263,7 +263,7 @@
 				var wNumber=_options.numberWidth;
 				var wBox=(wBorder*2)+((wInner*nRoll)-wInner)+(wNumber*nRoll)
 				//-----------------------//
-				//----    Hauteur    ----//
+				//----    Height     ----//
 				var hNumber=_options.numberHeight;
 				var hBox=((wBorder*2)+hNumber);
 				var hRoll=wBorder+hNumber;
@@ -274,13 +274,13 @@
 				var blurShadowBox=_options.blurShadowBox
 				var spreadShadowBox=_options.spreadShadowBox
 				//-----------------------//
-				//----    Couleur    ----//
+				//----    Color      ----//
 				var cStart=_options.colorFrom;
 				var cStop=_options.colorTo;
 				var cShadowBox=_options.colorShadowBox;
 				var cShadowRollFrom=_options.colorShadowRollFrom;
 				var cShadowRollTo=_options.colorShadowRollTo;
-				var cBackground=_options.colorBackground;
+				var cBackground=_options.background;
 				//-----------------------//
 				//-----------------------//
 				//-----------------------//
@@ -299,7 +299,7 @@
 				$(item).attr("style","width:"+wBox+"px;height:"+hBox+"px;");
 				$(_divBox).attr("style","position:relative;width:"+wBox+"px;height:"+hBox+"px;background:"+cBackground+";"+shadowBox+"z-index:9999");
 				/**********************************************
-				****    Création des rouleaux              ****
+				****    Create roll                        ****
 				**********************************************/
 				for(iRoll=0;iRoll<nRoll;iRoll++){
 					var shadowLeft=$canvas.getContext("2d");
