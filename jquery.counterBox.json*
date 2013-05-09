@@ -1,0 +1,39 @@
+{
+    "name": "counterBox",
+    "title": "jQuery Counter Box",
+    "description": "jQuery plugin for counter box with animation.",
+    "keywords": [
+        "counter",
+        "timer",
+        "box",
+        "animation"
+    ],
+    "version": "1.1.7",
+    "author": {
+        "name": "Christophe Tasserie",
+        "url": ""
+    },
+    "maintainers": [
+        {
+            "name": "Christophe Tasserie",
+            "email": "christophe@tasserie.fr",
+            "url": "http://www.tasserie.fr"
+        }
+    ],
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "https://github.com/ChrisTasserie/counterBox/blob/master/MIT-LICENSE.txt"
+        }
+    ],
+  "repository": {
+		"type": "git",
+		"url": "https://github.com/ChrisTasserie/counterBox.git"
+	},
+	"bugs": "https://github.com/ChrisTasserie/counterBox/issues",
+    "homepage": "https://github.com/ChrisTasserie/counterBox",
+    "download": "https://github.com/ChrisTasserie/counterBox/archive/master.zip",
+    "dependencies": {
+        "jquery": ">=1.5"
+    }
+}
