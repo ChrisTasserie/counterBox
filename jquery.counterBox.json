@@ -23,7 +23,7 @@
     "licenses": [
         {
             "type": "MIT",
-            "url": "https://github.com/ChrisTasserie/counterBox/blob/master/MIT-LICENSE.txt"
+            "url": "https://github.com/ChrisTasserie/counterBox/blob/1.1.8/MIT-LICENSE.txt"
         }
     ],
   "repository": {
@@ -32,7 +32,7 @@
 	},
 	"bugs": "https://github.com/ChrisTasserie/counterBox/issues",
     "homepage": "https://github.com/ChrisTasserie/counterBox",
-    "download": "https://github.com/ChrisTasserie/counterBox/archive/master.zip",
+    "download": "https://github.com/ChrisTasserie/counterBox/archive/1.1.8.zip",
     "dependencies": {
         "jquery": ">=1.5"
     }
