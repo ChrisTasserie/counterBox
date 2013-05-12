@@ -28,7 +28,7 @@
 
 (function($){
 	$.fn.extend({
-		counterBox:function(options, value, duration, easing, callback){
+		counterBox:function(value, options, duration, easing, callback){
 			/****************************************************************
 			****	Variables                                            ****
 			****************************************************************/
@@ -47,6 +47,11 @@
 			}
 			var setValueMax = function(item, value){
 				_options.maxValue=value;
+				$.each($(item).children(),function(){
+					if($(this).attr("type")!="hidden"){$(this).remove();}
+				});
+				createBox(item);
+				createNumber(_divBox);
 				createLastNumber(item);
 				setValue(item,_value);
 			}
@@ -163,12 +168,10 @@
 					$($column).attr("value",number);
 				}
 			}
-			
 			if(!_value){_value=0;}
 			if(!duration){_duration=1000;}
 			if(!easing){_easing="linear";}
 			if(!callback){_callback=null;}
-			
 			/****************************************************************
 			****	Extend Otions counterBox                             ****
 			****************************************************************/
@@ -195,20 +198,17 @@
 			  colorShadowBox:"rgba(0,0,0,0.8)",                  //Color shadow box
 			  colorText:"rgba(0,0,0,1)",                         //Color text
 			  background:"rgba(255,255,255,1)",                  //Background
-			  repeat:true,                                       //Mode repeat
+			  repeat:false,                                       //Mode repeat
 			}, options);
-			
 			if(_value>_options.maxValue){_value=_options.maxValue;}
 			_hiddenValue=document.createElement("input");
 			$(_hiddenValue).attr("type","hidden");
 			$(_hiddenValue).val(_value);
 			$(this).append(_hiddenValue);
-			
 			createBox(this);
 			createNumber(_divBox);
 			createLastNumber(this);
 			init(this);
-			
 			/****************************************************************
 			****	Extend Function counterBox                           ****
 			****************************************************************/
@@ -248,9 +248,7 @@
 				removeTick:function(value, callback){gotoLessValue($(this), parseInt($($(this).find("input")).val())-value, callback);},
 				getId:function(){return $(this).attr("id");}
 			});
-			
 			return this;
-			
 			function createBox(item){
 				/**********************************************
 				****    Variables                          ****
@@ -449,7 +447,7 @@
 						$($column).attr("value",number);
 					}
 					var nArray=0;
-					for(i=(_options.maxValue.toString().length-array.length);i<=array.length;i++){
+					for(i=(_options.maxValue.toString().length-array.length);i<=_options.maxValue.toString().length;i++){
 						var nRoll=i+1;
 						var number=array[nArray];
 						$column=$($($box).children()[nRoll]).children()[0];
