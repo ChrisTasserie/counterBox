@@ -1,0 +1,594 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="jquery.counterBox.css"/>
+<title>.: counterBox - Plugin jQuery - Documentation :.</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.0.0.min.js"></script>
+<script type="text/javascript" src="jquery.counterBox.js"></script>
+<script type="text/javascript">
+$(function(){
+  $counter=$("#my_box").counterBox(0,{maxValue:59},1000,"linear",finish);
+    $("#button_start").click(function(){addTick();});
+    function addTick(){$counter.addTick(1,addTick);}
+    function finish(){alert("Finish");}
+});
+</script>
+<style>
+html, body{
+	margin:0;
+	padding:0;
+	height:100%;
+	background:#0769AD;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	overflow:auto;
+}
+header{
+	position:relative;
+	top:0px;
+	left:0px;
+	height:66px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:36px;
+	font-weight:bold;
+	color:#ffffff;
+	padding-left:280px;
+	background-image:url(http://plugins.jquery.com/jquery-wp-content/themes/jquery/images/logo-jquery.png);
+	background-position:center left;
+	background-repeat:no-repeat;
+	min-width:460px;
+	overflow:hidden;
+}
+footer{
+	position:absolute;
+	bottom:0;
+	width:100%;
+	height:40px;
+	padding-top:10px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:10px;
+	text-align:center;
+	border-top:1px solid #7acef4;
+	z-index:9999;
+	color:#ffffff;
+	overflow:hidden;
+}
+footer a:link{
+	text-decoration:none;
+	color:#ffffff;
+}
+footer a:visited{
+	text-decoration:none;
+	color:#ffffff;
+}
+footer a:active{
+	text-decoration:none;
+	color:#ffffff;
+}
+footer a:hover{
+	text-decoration:none;
+	color:#ffffff;
+}
+h1{
+	margin:0;
+	padding:0;
+	font-size:16px;
+}
+h2{
+	background:#25649F;
+	font-size:16px;
+	font-weight:bold;
+	color:#ffffff;
+	margin:0;
+	padding:5px;
+}
+code{
+	padding:0 3px;
+	background-color:#eeeeee;
+	border-radius:3px;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+#main{
+	min-height:100%;
+	position:relative;
+}
+#content{
+	position:relative;
+	padding-top:10px;
+	padding-bottom:60px;
+	border-top:1px solid #7acef4;
+}
+
+#menu{
+	position:absolute;
+	top:-10px;
+	left:0px;
+	padding:10px 5px;
+	width:170px;
+	height:100%;
+	background:#0769AD;
+	border-right:1px solid #7acef4;
+	box-shadow:5px 0px 5px rgba(0,0,0,0.4);
+}
+#menu ul{
+	margin:0;
+	padding:0;
+}
+#menu li{
+	list-style-type:none;
+	padding:2px;
+}
+#menu a:link{
+	color:#ffffff;
+}
+#menu a:visited{
+	color:#ffffff;
+}
+#menu a:active{
+	color:#ffffff;
+}
+#menu a:hover{
+	color:#ffffff;
+}
+#doc{
+	position:relative;
+	padding-left:190px;
+	background:#ffffff;
+}
+
+.table_explain{
+	margin:0 10px;
+	width:600px;
+	border:1px solid #cccccc;
+	background:#eeeeee;
+}
+.table_explain h1{
+	font-size:14px;
+	display:inline-block;
+}
+.table_explain ul{
+	margin:10px;
+	padding:0;
+}
+.table_explain ul ul{
+	margin-left:50px;
+	padding:0;
+}
+.table_explain li:first-child{
+	border-top:none;
+}
+.table_explain li{
+	margin:0;
+	padding:0;
+	padding-bottom:10px;
+	list-style-type:none;
+	border-top:1px solid #cccccc;
+}
+.table_explain li a{
+	color:#0769AD;
+}
+
+.table_function{
+	margin:0 10px;
+	width:600px;
+	border:1px solid #cccccc;
+	background:#eeeeee;
+}
+.table_function h1{
+	font-size:14px;
+	display:inline-block;
+}
+.table_function ul{
+	margin:10px;
+	padding:0;
+}
+.table_function ul ul{
+	margin-left:50px;
+	padding:0;
+}
+.table_function li:first-child{
+	border-top:none;
+}
+.table_function li{
+	margin:0;
+	padding:0;
+	padding-bottom:10px;
+	list-style-type:none;
+	border-top:1px solid #cccccc;
+}
+.table_function li a{
+	color:#0769AD;
+}
+
+.table_code{
+	background:#eeeeee;
+	border-radius:6px;
+	padding:5px;
+}
+.table_code td:first-child{
+	text-align:right;
+	font-weight:bold;
+	border-right:2px solid #000000;
+}
+.table_code td{
+	text-align:left;
+	padding:2px;
+}
+</style>
+</head>
+
+<body>
+<div id="main">
+    <header>counterBox - Plugin jQuery</header>
+    <div id="content">
+        <div id="doc">
+			<div id="menu">
+				<ul>
+					<li><a href="#documentation">Home Page</a></li>
+					<li><a href="#initialisation">Initialisation</a></li>
+					<li><a href="#function">Function</a></li>
+					<li><a href="#duration">Duration</a></li>
+					<li><a href="#complete">Complete</a></li>
+					<li><a href="#basicusage">Basic Usage</a></li>
+					<li><a href="#usageadvanced">Usage Advanced</a></li>
+					<li><a href="#easing">Easing</a></li>
+					<li><a href="#examples">Example</a></li>
+				</ul>
+			</div>
+        	<h1 id="documentation">Documentation</h1>
+			<br />
+            counterBox pour jQuery a été conçut dans le but de faciliter la mise en place de la boîte de compteur.<br />
+            Il est compatible avec les versions suppèrieur ou égale à 1.6.3<br />
+            Pour toute remontée de bugs, merci de m'écrire à l'adresse suivante : <a href="mailto:christophe@tasserie.fr">christophe@tasserie.fr</a>.<br />
+            <br />
+            <h1 id="initialisation">Initialisation de la boîte</h1>
+			<br />
+            <div class="table_explain">
+                <h2>.counterBox([ value ] [, options ]  [, duration ] [, easing ] [, complete ] )</h2>
+                <ul>
+                	<li>
+                    	<h1>value</h1>  (default: 0)<br />
+                        Type : <a href="http://api.jquery.com/Types#Number" target="_blank">Number</a><br />
+                        A init value.
+                    </li>
+                	<li>
+                    	<h1>options</h1><br />
+                        Type : <a href="http://api.jquery.com/Types/#PlainObject" target="_blank">PlainObject</a><br />
+                        An object of CSS properties and values that the animation will move toward.
+                        <ul>
+                            <li>
+                                <h1>maxValue</h1>  (default: 9)<br />
+                                Type : <a href="http://api.jquery.com/Types/#Number" target="_blank">Number</a><br />
+                                A number determining a maximum value.
+                            </li>
+                            <li>
+                                <h1>borderWidth</h1>  (default: 2)<br />
+                                Type : <a href="http://api.jquery.com/Types/#Number" target="_blank">Number</a><br />
+                                A number determining a width border.
+                            </li>
+                            <li>
+                                <h1>innerWidth</h1>  (default: 0)<br />
+                                Type : <a href="http://api.jquery.com/Types/#Number" target="_blank">Number</a><br />
+                                A number determining a width inner border.
+                            </li>
+                            <li>
+                                <h1>numberWidth</h1>  (default: 30)<br />
+                                Type : <a href="http://api.jquery.com/Types/#Number" target="_blank">Number</a><br />
+                                A number determining a width roll. The format it's in pixel.
+                            </li>
+                            <li>
+                                <h1>numberHeight</h1>  (default: 60)<br />
+                                Type : <a href="http://api.jquery.com/Types/#Number" target="_blank">Number</a><br />
+                                A number determining a height roll. The format it's in pixel.
+                            </li>
+                            <li>
+                                <h1>percentShadowRoll</h1>  (default: 50)<br />
+                                Type : <a href="http://api.jquery.com/Types/#Number" target="_blank">Number</a><br />
+                                A number determining a height shadow roll. The format it's in percent.
+                            </li>
+                            <li>
+                                <h1>xShadowBox</h1>  (default: 0)<br />
+                                Type : <a href="http://api.jquery.com/Types/#Number" target="_blank">Number</a><br />
+                                A number determining a horizontal shadow box. The format it's in pixel.
+                            </li>
+                            <li>
+                                <h1>yShadowBox</h1>  (default: 0)<br />
+                                Type : <a href="http://api.jquery.com/Types/#Number" target="_blank">Number</a><br />
+                                A number determining a vertical shadow box. The format it's in pixel.
+                            </li>
+                            <li>
+                                <h1>blurShadowBox</h1>  (default: 5)<br />
+                                Type : <a href="http://api.jquery.com/Types/#Number" target="_blank">Number</a><br />
+                                A number determining a blur shadow box. The format it's in pixel.
+                            </li>
+                            <li>
+                                <h1>spreadShadowBox</h1>  (default: 0)<br />
+                                Type : <a href="http://api.jquery.com/Types/#Number" target="_blank">Number</a><br />
+                                A number determining a spread shadow box. The format it's in pixel.
+                            </li>
+                            <li>
+                                <h1>shadowBox</h1>  (default: true)<br />
+                                Type : <a href="http://api.jquery.com/Types/#Boolean" target="_blank">Boolean</a><br />
+                                A boolean determining a enable shadow box.
+                            </li>
+                            <li>
+                                <h1>colorFrom</h1>  (default: rgba(96,96,96,1))<br />
+                                Type : <a href="http://api.jquery.com/Types/#String" target="_blank">String</a><br />
+                                A string determining a color from box.
+                            </li>
+                            <li>
+                                <h1>colorTo</h1>  (default: rgba(248,248,248,1))<br />
+                                Type : <a href="http://api.jquery.com/Types/#String" target="_blank">String</a><br />
+                                A string determining a color to box.
+                            </li>
+                            <li>
+                                <h1>colorRoll</h1>  (default: rgba(255,0,255,1))<br />
+                                Type : <a href="http://api.jquery.com/Types/#String" target="_blank">String</a><br />
+                                A string determining a background color roll.
+                            </li>
+                            <li>
+                                <h1>colorShadowRollFrom</h1>  (default: rgba(0,0,0,0.8))<br />
+                                Type : <a href="http://api.jquery.com/Types/#String" target="_blank">String</a><br />
+                                A string determining a color from shadow roll.
+                            </li>
+                            <li>
+                                <h1>colorShadowRollTo</h1>  (default: rgba(255,255,255,0))<br />
+                                Type : <a href="http://api.jquery.com/Types/#String" target="_blank">String</a><br />
+                                A string determining a color to shadow roll.
+                            </li>
+                            <li>
+                                <h1>colorShadowBox</h1>  (default: rgba(0,0,0,0.8))<br />
+                                Type : <a href="http://api.jquery.com/Types/#String" target="_blank">String</a><br />
+                                A string determining a color shadow box.
+                            </li>
+                            <li>
+                                <h1>colorText</h1>  (default: rgba(0,0,0,1))<br />
+                                Type : <a href="http://api.jquery.com/Types/#String" target="_blank">String</a><br />
+                                A string determining a color text.
+                            </li>
+                            <li>
+                                <h1>background</h1>  (default: rgba(255,255,255,1))<br />
+                                Type : <a href="http://api.jquery.com/Types/#String" target="_blank">String</a><br />
+                                A string determining a background.
+                            </li>
+                            <li>
+                                <h1>repeat</h1>  (default: false)<br />
+                                Type : <a href="http://api.jquery.com/Types/#Boolean" target="_blank">Boolean</a><br />
+                                A boolean determining a repeat when this finish count.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h1>duration</h1> (default: 1000)<br />
+                        Type: <a href="http://api.jquery.com/Types#Number" target="_blank">Number</a><br />
+                        A number determining how long the animation will run. The format it's in milliseconds.
+                    </li>
+                    <li>
+                        <h1>easing</h1> (default: linear)<br />
+                        Type: <a href="http://api.jquery.com/Types#String" target="_blank">String</a><br />
+                        A string indicating which easing function to use for the transition. <a href="http://jqueryui.com/effect/#easing" target="_blank">List of easing</a>
+                    </li>
+                    <li>
+                        <h1>complete</h1> (default: null)<br />
+                        Type: <a href="http://api.jquery.com/Types#Function" target="_blank">Function</a>()<br />
+                        A function to call once the animation is complete.
+                    </li>
+                </ul>
+            </div>
+			<br />
+            <h1 id="function">Function</h1>
+			<br />
+			You have 10 functions.<br />
+			<div class="table_function">
+				<ul>
+					<li>
+						<h1>setValue</h1>(Number)<br />
+						Type : <a href="http://api.jquery.com/Types/#Number" target="_blank">Number</a><br />
+						A number determining a value.
+					</li>
+					<li>
+						<h1>setValueMax</h1>(Number)<br />
+						Type : <a href="http://api.jquery.com/Types/#Number" target="_blank">Number</a><br />
+						A number determining a maximum value.
+					</li>
+					<li>
+						<h1>setOptions</h1>(PlainObject)<br />
+						Type : <a href="http://api.jquery.com/Types/#PlainObject" target="_blank">PlainObject</a><br />
+                        An object of CSS properties and values that the animation will move toward.
+					</li>
+					<li>
+						<h1>getValue</h1>()<br />
+						Type : <a href="http://api.jquery.com/Types/#Number" target="_blank">Number</a><br />
+						Return a value number.
+					</li>
+					<li>
+						<h1>getValueMax</h1>()<br />
+						Type : <a href="http://api.jquery.com/Types/#Number" target="_blank">Number</a><br />
+						Return a maximum value number.
+					</li>
+					<li>
+						<h1>getOptions</h1>()<br />
+						Type : <a href="http://api.jquery.com/Types/#Number" target="_blank">PlainObject</a><br />
+						Return a options plainobject.
+					</li>
+					<li>
+						<h1>gotoValue</h1>(Number)<br />
+						Type : <a href="http://api.jquery.com/Types/#Number" target="_blank">Number</a><br />
+						Move a number to value.
+					</li>
+					<li>
+						<h1>addTick</h1>(Number [, complete ])<br />
+						Type : <a href="http://api.jquery.com/Types/#Number" target="_blank">Number</a><br />
+						Add a number to value.<br />
+						And<br />
+						Type: <a href="http://api.jquery.com/Types#Function" target="_blank">Function</a>()<br />
+                        A function to call once the animation is complete.
+					</li>
+					<li>
+						<h1>removeTick</h1>(Number [, complete ])<br />
+						Type : <a href="http://api.jquery.com/Types/#Number" target="_blank">Number</a><br />
+						RemoveTick a number to value.<br />
+						And<br />
+						Type: <a href="http://api.jquery.com/Types#Function" target="_blank">Function</a>()<br />
+                        A function to call once the animation is complete.
+					</li>
+					<li>
+						<h1>getId</h1>()<br />
+						Type : <a href="http://api.jquery.com/Types/#String" target="_blank">String</a><br />
+						Return a string ID.
+					</li>
+				</ul>
+			</div>
+			<br />
+            <h1 id="duration">Duration</h1>
+			<br />
+			Durations are given in milliseconds; higher values indicate slower animations, not faster ones.<br />
+			The default duration is 400 milliseconds. The strings <code>'fast'</code> and <code>'slow'</code> can be supplied to indicate durations of 200 and 600 milliseconds, respectively.<br />
+			<br />
+			<h1 id="complete">Complete Function</h1>
+			<br />
+			If supplied, the <code>complete</code> callback function is fired once the animation is complete.<br />
+			This can be useful for stringing different animations together in sequence.<br />
+			The callback is not sent any arguments, but <code>this</code> is set to the DOM element being animated.<br />
+			If multiple elements are animated, the callback is executed once per matched element, not once for the animation as a whole.<br />
+			<br />
+			<h1 id="basicusage">Basic Usage</h1>
+			<br />
+			<table cellpadding="0" cellspacing="0" border="0" class="table_code">
+				<tr>
+					<td>1</td>
+					<td>$("#my_box").counterBox();</td>
+				</tr>
+			</table>
+			<br />
+			<h1 id="usageadvanced">Usage Advanced</h1>
+			<br />
+			<table cellpadding="0" cellspacing="0" border="0" class="table_code">
+				<tr>
+					<td>1</td>
+					<td>$("#my_box").counterBox(0,{maxValue:59},1000,"easeOutBounce");</td>
+				</tr>
+			</table>
+			<br />
+			<table cellpadding="0" cellspacing="0" border="0" class="table_code">
+				<tr>
+					<td>1</td>
+					<td>$counter=$("#my_box").counterBox();</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>$counter.setValue(2);</td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td>$counter.setValueMax(16);</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>addTick();</td>
+				</tr>
+				<tr>
+					<td>5</td>
+					<td>function addTick(){$counter.addTick(1,addTick);}</td>
+				</tr>
+			</table>
+			<br />
+			<h1 id="easing">Easing</h1>
+			<br />
+			The remaining parameter of .counterBox() is a string naming an easing function to use.<br />
+			An easing function specifies the speed at which the animation progresses at different points within the animation.<br />
+			The only easing implementations in the jQuery library are the default, called swing, and one that progresses at a constant pace, called linear.<br />
+			More easing functions are available with the use of plug-ins, most notably the <a href="http://jqueryui.com/effect/#easing" target="_blank">jQuery UI suite</a>.<br />
+			<br />
+			<h1 id="examples">Examples</h1>
+			<br />
+			<table cellpadding="0" cellspacing="0" border="0" class="table_code">
+				<tr>
+					<td>1</td>
+					<td>&lt;!DOCTYPE html&gt;</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>&lt;html&gt;</td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td>&lt;head&gt;</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>&lt;script type="text/javascript" src="jquery-2.0.0.min.js"&gt;&lt;/script&gt;</td>
+				</tr>
+				<tr>
+					<td>5</td>
+					<td>&lt;script type="text/javascript" src="jquery.counterBox.min.js"&gt;&lt;/script&gt;</td>
+				</tr>
+				<tr>
+					<td>6</td>
+					<td>&lt;script type="text/javascript"&gt;</td>
+				</tr>
+				<tr>
+					<td>7</td>
+					<td>$(function(){</td>
+				</tr>
+				<tr>
+					<td>8</td>
+					<td>&nbsp;&nbsp;&nbsp;&nbsp;$counter=$("#my_box").counterBox(0,{maxValue:59},1000,"linear",finish);</td>
+				</tr>
+				<tr>
+					<td>9</td>
+					<td>&nbsp;&nbsp;&nbsp;&nbsp;addTick();</td>
+				</tr>
+				<tr>
+					<td>10</td>
+					<td>&nbsp;&nbsp;&nbsp;&nbsp;function addTick(){$counter.addTick(1,addTick);}</td>
+				</tr>
+				<tr>
+					<td>11</td>
+					<td>&nbsp;&nbsp;&nbsp;&nbsp;function finish(){alert("Finish");}</td>
+				</tr>
+				<tr>
+					<td>12</td>
+					<td>});</td>
+				</tr>
+				<tr>
+					<td>13</td>
+					<td>&lt;/script&gt;</td>
+				</tr>
+				<tr>
+					<td>14</td>
+					<td>&lt;/head&gt;</td>
+				</tr>
+				<tr>
+					<td>15</td>
+					<td>&lt;body&gt;</td>
+				</tr>
+				<tr>
+					<td>16</td>
+					<td>&lt;div id="my_box"&gt;&lt;/div&gt;</td>
+				</tr>
+				<tr>
+					<td>17</td>
+					<td>&lt;/body&gt;</td>
+				</tr>
+				<tr>
+					<td>18</td>
+					<td>&lt;/html&gt;</td>
+				</tr>
+			</table>
+			<br />
+			<button type="button" id="button_start">Start</button><br />
+			<br />
+			<div id="my_box"></div>
+			<br />
+        </div>
+    </div>
+    <footer>
+        counterBox - Plugin jQuery - Documentation - created by Christophe Tasserie<br />
+        <a href="https://github.com/ChrisTasserie/counterBox" target="_blank">Home Page</a> - <a href="mailto:christophe@tasserie.fr">christophe@tasserie.fr</a> - +33(0)622.256.941
+    </footer>
+</div>
+</body>
+</html>
